@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.propwise.mapper.PwUserAddressMapper">
+    
+    <resultMap type="PwUserAddress" id="PwUserAddressResult">
+        <result property="addressId"    column="address_id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="addressName"    column="address_name"    />
+        <result property="address"    column="address"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectPwUserAddressVo">
+        select address_id, user_id, address_name, address, create_by, create_time, update_by, update_time, remark from pw_user_address
+    </sql>
+
+    <select id="selectPwUserAddressList" parameterType="PwUserAddress" resultMap="PwUserAddressResult">
+        <include refid="selectPwUserAddressVo"/>
+        <where>  
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="addressName != null  and addressName != ''"> and address_name like concat('%', #{addressName}, '%')</if>
+            <if test="address != null  and address != ''"> and address = #{address}</if>
+        </where>
+    </select>
+    
+    <select id="selectPwUserAddressByAddressId" parameterType="Long" resultMap="PwUserAddressResult">
+        <include refid="selectPwUserAddressVo"/>
+        where address_id = #{addressId}
+    </select>
+
+    <insert id="insertPwUserAddress" parameterType="PwUserAddress" useGeneratedKeys="true" keyProperty="addressId">
+        insert into pw_user_address
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">user_id,</if>
+            <if test="addressName != null and addressName != ''">address_name,</if>
+            <if test="address != null and address != ''">address,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">#{userId},</if>
+            <if test="addressName != null and addressName != ''">#{addressName},</if>
+            <if test="address != null and address != ''">#{address},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updatePwUserAddress" parameterType="PwUserAddress">
+        update pw_user_address
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="addressName != null and addressName != ''">address_name = #{addressName},</if>
+            <if test="address != null and address != ''">address = #{address},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where address_id = #{addressId}
+    </update>
+
+    <delete id="deletePwUserAddressByAddressId" parameterType="Long">
+        delete from pw_user_address where address_id = #{addressId}
+    </delete>
+
+    <delete id="deletePwUserAddressByAddressIds" parameterType="String">
+        delete from pw_user_address where address_id in 
+        <foreach item="addressId" collection="array" open="(" separator="," close=")">
+            #{addressId}
+        </foreach>
+    </delete>
+</mapper>

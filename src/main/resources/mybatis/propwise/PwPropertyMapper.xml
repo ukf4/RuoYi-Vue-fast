@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.propwise.mapper.PwPropertyMapper">
+    
+    <resultMap type="PwProperty" id="PwPropertyResult">
+        <result property="propertyId"    column="property_id"    />
+        <result property="title"    column="title"    />
+        <result property="description"    column="description"    />
+        <result property="price"    column="price"    />
+        <result property="address"    column="address"    />
+        <result property="city"    column="city"    />
+        <result property="postalCode"    column="postal_code"    />
+        <result property="country"    column="country"    />
+        <result property="region"    column="region"    />
+        <result property="bedrooms"    column="bedrooms"    />
+        <result property="bathrooms"    column="bathrooms"    />
+        <result property="gardenSize"    column="garden_size"    />
+        <result property="propertyType"    column="property_type"    />
+        <result property="buildYear"    column="build_year"    />
+        <result property="squareFeet"    column="square_feet"    />
+        <result property="squareMeters"    column="square_meters"    />
+        <result property="floors"    column="floors"    />
+        <result property="parkingSpaces"    column="parking_spaces"    />
+        <result property="energyRating"    column="energy_rating"    />
+        <result property="listedDate"    column="listed_date"    />
+        <result property="isAvailable"    column="is_available"    />
+        <result property="status"    column="status"    />
+        <result property="sourceWebsite"    column="source_website"    />
+        <result property="sourceId"    column="source_id"    />
+        <result property="sourceUrl"    column="source_url"    />
+        <result property="listingDate"    column="listing_date"    />
+        <result property="dataCollectedAt"    column="data_collected_at"    />
+        <result property="dataUpdatedAt"    column="data_updated_at"    />
+        <result property="agentPhone"    column="agent_phone"    />
+        <result property="agentEmail"    column="agent_email"    />
+        <result property="agentName"    column="agent_name"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectPwPropertyVo">
+        select property_id, title, description, price, address, city, postal_code, country, region, bedrooms, bathrooms, garden_size, property_type, build_year, square_feet, square_meters, floors, parking_spaces, energy_rating, listed_date, is_available, status, source_website, source_id, source_url, listing_date, data_collected_at, data_updated_at, agent_phone, agent_email, agent_name, create_by, create_time, update_by, update_time, remark from pw_property
+    </sql>
+
+    <select id="selectPwPropertyList" parameterType="PwProperty" resultMap="PwPropertyResult">
+        <include refid="selectPwPropertyVo"/>
+        <where>  
+            <if test="title != null  and title != ''"> and title = #{title}</if>
+            <if test="description != null  and description != ''"> and description = #{description}</if>
+            <if test="price != null "> and price = #{price}</if>
+            <if test="address != null  and address != ''"> and address = #{address}</if>
+            <if test="city != null  and city != ''"> and city = #{city}</if>
+            <if test="postalCode != null  and postalCode != ''"> and postal_code = #{postalCode}</if>
+            <if test="country != null  and country != ''"> and country = #{country}</if>
+            <if test="region != null  and region != ''"> and region = #{region}</if>
+            <if test="bedrooms != null "> and bedrooms = #{bedrooms}</if>
+            <if test="bathrooms != null "> and bathrooms = #{bathrooms}</if>
+            <if test="gardenSize != null "> and garden_size = #{gardenSize}</if>
+            <if test="propertyType != null  and propertyType != ''"> and property_type = #{propertyType}</if>
+            <if test="buildYear != null  and buildYear != ''"> and build_year = #{buildYear}</if>
+            <if test="squareFeet != null "> and square_feet = #{squareFeet}</if>
+            <if test="squareMeters != null "> and square_meters = #{squareMeters}</if>
+            <if test="floors != null "> and floors = #{floors}</if>
+            <if test="parkingSpaces != null "> and parking_spaces = #{parkingSpaces}</if>
+            <if test="energyRating != null  and energyRating != ''"> and energy_rating = #{energyRating}</if>
+            <if test="listedDate != null "> and listed_date = #{listedDate}</if>
+            <if test="isAvailable != null  and isAvailable != ''"> and is_available = #{isAvailable}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+            <if test="sourceWebsite != null  and sourceWebsite != ''"> and source_website = #{sourceWebsite}</if>
+            <if test="sourceId != null  and sourceId != ''"> and source_id = #{sourceId}</if>
+            <if test="sourceUrl != null  and sourceUrl != ''"> and source_url = #{sourceUrl}</if>
+            <if test="listingDate != null "> and listing_date = #{listingDate}</if>
+            <if test="dataCollectedAt != null "> and data_collected_at = #{dataCollectedAt}</if>
+            <if test="dataUpdatedAt != null "> and data_updated_at = #{dataUpdatedAt}</if>
+            <if test="agentPhone != null  and agentPhone != ''"> and agent_phone = #{agentPhone}</if>
+            <if test="agentEmail != null  and agentEmail != ''"> and agent_email = #{agentEmail}</if>
+            <if test="agentName != null  and agentName != ''"> and agent_name like concat('%', #{agentName}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectPwPropertyByPropertyId" parameterType="Long" resultMap="PwPropertyResult">
+        <include refid="selectPwPropertyVo"/>
+        where property_id = #{propertyId}
+    </select>
+
+    <insert id="insertPwProperty" parameterType="PwProperty" useGeneratedKeys="true" keyProperty="propertyId">
+        insert into pw_property
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="title != null and title != ''">title,</if>
+            <if test="description != null">description,</if>
+            <if test="price != null">price,</if>
+            <if test="address != null">address,</if>
+            <if test="city != null">city,</if>
+            <if test="postalCode != null">postal_code,</if>
+            <if test="country != null">country,</if>
+            <if test="region != null">region,</if>
+            <if test="bedrooms != null">bedrooms,</if>
+            <if test="bathrooms != null">bathrooms,</if>
+            <if test="gardenSize != null">garden_size,</if>
+            <if test="propertyType != null">property_type,</if>
+            <if test="buildYear != null">build_year,</if>
+            <if test="squareFeet != null">square_feet,</if>
+            <if test="squareMeters != null">square_meters,</if>
+            <if test="floors != null">floors,</if>
+            <if test="parkingSpaces != null">parking_spaces,</if>
+            <if test="energyRating != null">energy_rating,</if>
+            <if test="listedDate != null">listed_date,</if>
+            <if test="isAvailable != null">is_available,</if>
+            <if test="status != null">status,</if>
+            <if test="sourceWebsite != null">source_website,</if>
+            <if test="sourceId != null">source_id,</if>
+            <if test="sourceUrl != null">source_url,</if>
+            <if test="listingDate != null">listing_date,</if>
+            <if test="dataCollectedAt != null">data_collected_at,</if>
+            <if test="dataUpdatedAt != null">data_updated_at,</if>
+            <if test="agentPhone != null">agent_phone,</if>
+            <if test="agentEmail != null">agent_email,</if>
+            <if test="agentName != null">agent_name,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="title != null and title != ''">#{title},</if>
+            <if test="description != null">#{description},</if>
+            <if test="price != null">#{price},</if>
+            <if test="address != null">#{address},</if>
+            <if test="city != null">#{city},</if>
+            <if test="postalCode != null">#{postalCode},</if>
+            <if test="country != null">#{country},</if>
+            <if test="region != null">#{region},</if>
+            <if test="bedrooms != null">#{bedrooms},</if>
+            <if test="bathrooms != null">#{bathrooms},</if>
+            <if test="gardenSize != null">#{gardenSize},</if>
+            <if test="propertyType != null">#{propertyType},</if>
+            <if test="buildYear != null">#{buildYear},</if>
+            <if test="squareFeet != null">#{squareFeet},</if>
+            <if test="squareMeters != null">#{squareMeters},</if>
+            <if test="floors != null">#{floors},</if>
+            <if test="parkingSpaces != null">#{parkingSpaces},</if>
+            <if test="energyRating != null">#{energyRating},</if>
+            <if test="listedDate != null">#{listedDate},</if>
+            <if test="isAvailable != null">#{isAvailable},</if>
+            <if test="status != null">#{status},</if>
+            <if test="sourceWebsite != null">#{sourceWebsite},</if>
+            <if test="sourceId != null">#{sourceId},</if>
+            <if test="sourceUrl != null">#{sourceUrl},</if>
+            <if test="listingDate != null">#{listingDate},</if>
+            <if test="dataCollectedAt != null">#{dataCollectedAt},</if>
+            <if test="dataUpdatedAt != null">#{dataUpdatedAt},</if>
+            <if test="agentPhone != null">#{agentPhone},</if>
+            <if test="agentEmail != null">#{agentEmail},</if>
+            <if test="agentName != null">#{agentName},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updatePwProperty" parameterType="PwProperty">
+        update pw_property
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="title != null and title != ''">title = #{title},</if>
+            <if test="description != null">description = #{description},</if>
+            <if test="price != null">price = #{price},</if>
+            <if test="address != null">address = #{address},</if>
+            <if test="city != null">city = #{city},</if>
+            <if test="postalCode != null">postal_code = #{postalCode},</if>
+            <if test="country != null">country = #{country},</if>
+            <if test="region != null">region = #{region},</if>
+            <if test="bedrooms != null">bedrooms = #{bedrooms},</if>
+            <if test="bathrooms != null">bathrooms = #{bathrooms},</if>
+            <if test="gardenSize != null">garden_size = #{gardenSize},</if>
+            <if test="propertyType != null">property_type = #{propertyType},</if>
+            <if test="buildYear != null">build_year = #{buildYear},</if>
+            <if test="squareFeet != null">square_feet = #{squareFeet},</if>
+            <if test="squareMeters != null">square_meters = #{squareMeters},</if>
+            <if test="floors != null">floors = #{floors},</if>
+            <if test="parkingSpaces != null">parking_spaces = #{parkingSpaces},</if>
+            <if test="energyRating != null">energy_rating = #{energyRating},</if>
+            <if test="listedDate != null">listed_date = #{listedDate},</if>
+            <if test="isAvailable != null">is_available = #{isAvailable},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="sourceWebsite != null">source_website = #{sourceWebsite},</if>
+            <if test="sourceId != null">source_id = #{sourceId},</if>
+            <if test="sourceUrl != null">source_url = #{sourceUrl},</if>
+            <if test="listingDate != null">listing_date = #{listingDate},</if>
+            <if test="dataCollectedAt != null">data_collected_at = #{dataCollectedAt},</if>
+            <if test="dataUpdatedAt != null">data_updated_at = #{dataUpdatedAt},</if>
+            <if test="agentPhone != null">agent_phone = #{agentPhone},</if>
+            <if test="agentEmail != null">agent_email = #{agentEmail},</if>
+            <if test="agentName != null">agent_name = #{agentName},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where property_id = #{propertyId}
+    </update>
+
+    <delete id="deletePwPropertyByPropertyId" parameterType="Long">
+        delete from pw_property where property_id = #{propertyId}
+    </delete>
+
+    <delete id="deletePwPropertyByPropertyIds" parameterType="String">
+        delete from pw_property where property_id in 
+        <foreach item="propertyId" collection="array" open="(" separator="," close=")">
+            #{propertyId}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.propwise.mapper.PwUserPropertyMapper">
+    
+    <resultMap type="PwUserProperty" id="PwUserPropertyResult">
+        <result property="id"    column="id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="propertyId"    column="property_id"    />
+        <result property="favoriteLevel"    column="favorite_level"    />
+        <result property="review"    column="review"    />
+        <result property="alias"    column="alias"    />
+        <result property="commuteTimeCar"    column="commute_time_car"    />
+        <result property="commuteTimeBike"    column="commute_time_bike"    />
+        <result property="commuteTimeWalk"    column="commute_time_walk"    />
+        <result property="commuteTimeTransit"    column="commute_time_transit"    />
+        <result property="favoriteDate"    column="favorite_date"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectPwUserPropertyVo">
+        select id, user_id, property_id, favorite_level, review, alias, commute_time_car, commute_time_bike, commute_time_walk, commute_time_transit, favorite_date, create_by, create_time, update_by, update_time, remark from pw_user_property
+    </sql>
+
+    <select id="selectPwUserPropertyList" parameterType="PwUserProperty" resultMap="PwUserPropertyResult">
+        <include refid="selectPwUserPropertyVo"/>
+        <where>  
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="propertyId != null "> and property_id = #{propertyId}</if>
+            <if test="favoriteLevel != null "> and favorite_level = #{favoriteLevel}</if>
+            <if test="review != null  and review != ''"> and review = #{review}</if>
+            <if test="alias != null  and alias != ''"> and alias = #{alias}</if>
+            <if test="commuteTimeCar != null  and commuteTimeCar != ''"> and commute_time_car = #{commuteTimeCar}</if>
+            <if test="commuteTimeBike != null  and commuteTimeBike != ''"> and commute_time_bike = #{commuteTimeBike}</if>
+            <if test="commuteTimeWalk != null  and commuteTimeWalk != ''"> and commute_time_walk = #{commuteTimeWalk}</if>
+            <if test="commuteTimeTransit != null  and commuteTimeTransit != ''"> and commute_time_transit = #{commuteTimeTransit}</if>
+            <if test="favoriteDate != null "> and favorite_date = #{favoriteDate}</if>
+        </where>
+    </select>
+    
+    <select id="selectPwUserPropertyById" parameterType="Long" resultMap="PwUserPropertyResult">
+        <include refid="selectPwUserPropertyVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertPwUserProperty" parameterType="PwUserProperty" useGeneratedKeys="true" keyProperty="id">
+        insert into pw_user_property
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">user_id,</if>
+            <if test="propertyId != null">property_id,</if>
+            <if test="favoriteLevel != null">favorite_level,</if>
+            <if test="review != null">review,</if>
+            <if test="alias != null">alias,</if>
+            <if test="commuteTimeCar != null">commute_time_car,</if>
+            <if test="commuteTimeBike != null">commute_time_bike,</if>
+            <if test="commuteTimeWalk != null">commute_time_walk,</if>
+            <if test="commuteTimeTransit != null">commute_time_transit,</if>
+            <if test="favoriteDate != null">favorite_date,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">#{userId},</if>
+            <if test="propertyId != null">#{propertyId},</if>
+            <if test="favoriteLevel != null">#{favoriteLevel},</if>
+            <if test="review != null">#{review},</if>
+            <if test="alias != null">#{alias},</if>
+            <if test="commuteTimeCar != null">#{commuteTimeCar},</if>
+            <if test="commuteTimeBike != null">#{commuteTimeBike},</if>
+            <if test="commuteTimeWalk != null">#{commuteTimeWalk},</if>
+            <if test="commuteTimeTransit != null">#{commuteTimeTransit},</if>
+            <if test="favoriteDate != null">#{favoriteDate},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updatePwUserProperty" parameterType="PwUserProperty">
+        update pw_user_property
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="propertyId != null">property_id = #{propertyId},</if>
+            <if test="favoriteLevel != null">favorite_level = #{favoriteLevel},</if>
+            <if test="review != null">review = #{review},</if>
+            <if test="alias != null">alias = #{alias},</if>
+            <if test="commuteTimeCar != null">commute_time_car = #{commuteTimeCar},</if>
+            <if test="commuteTimeBike != null">commute_time_bike = #{commuteTimeBike},</if>
+            <if test="commuteTimeWalk != null">commute_time_walk = #{commuteTimeWalk},</if>
+            <if test="commuteTimeTransit != null">commute_time_transit = #{commuteTimeTransit},</if>
+            <if test="favoriteDate != null">favorite_date = #{favoriteDate},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deletePwUserPropertyById" parameterType="Long">
+        delete from pw_user_property where id = #{id}
+    </delete>
+
+    <delete id="deletePwUserPropertyByIds" parameterType="String">
+        delete from pw_user_property where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,77 @@
+@startuml
+
+entity pw_property {
+  * property_id : bigint(20) <<PK>>
+  --
+  title : varchar(255)
+  description : text
+  price : decimal(15,2)
+  address : varchar(255)
+  city : varchar(100)
+  postal_code : varchar(10)
+  country : varchar(50)
+  region : varchar(100)
+  bedrooms : int(11)
+  bathrooms : int(11)
+  garden_size : decimal(10,2)
+  property_type : varchar(50)
+  build_year : year
+  square_feet : decimal(10,2)
+  square_meters : decimal(10,2)
+  floors : int(11)
+  parking_spaces : int(11)
+  energy_rating : char(2)
+  listed_date : date
+  is_available : char(1)
+  status : char(1)
+  source_website : varchar(100)
+  source_id : varchar(100)
+  source_url : varchar(255)
+  listing_date : date
+  data_collected_at : datetime
+  data_updated_at : datetime
+  agent_phone : varchar(100)
+  agent_email : varchar(100)
+  agent_name : varchar(100)
+}
+
+entity pw_user_address {
+  * address_id : bigint(20) <<PK>>
+  --
+  user_id : bigint(20) <<FK>>
+  address_name : varchar(255)
+  address : varchar(255)
+}
+
+entity pw_user_property {
+  * id : bigint(20) <<PK>>
+  --
+  user_id : bigint(20) <<FK>>
+  property_id : bigint(20) <<FK>>
+  favorite_level : int(11)
+  review : varchar(500)
+  alias : varchar(255)
+  commute_time_car : varchar(100)
+  commute_time_bike : varchar(100)
+  commute_time_walk : varchar(100)
+  commute_time_transit : varchar(100)
+  favorite_date : datetime
+}
+
+entity pw_profile {
+  * user_id : bigint(20) <<PK>>
+  --
+  first_name : varchar(50)
+  last_name : varchar(50)
+  whatsapp : varchar(50)
+  instagram : varchar(50)
+  facebook : varchar(50)
+  twitter : varchar(50)
+  linkedin : varchar(50)
+}
+
+pw_profile ||--o{ pw_user_address : "has"
+pw_profile ||--o{ pw_user_property : "collects"
+pw_property ||--o{ pw_user_property : "is collected"
+
+@enduml
