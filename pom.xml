@@ -8,7 +8,7 @@
     <version>1.0.0</version>
     <packaging>jar</packaging>
 
-    <name>ruoyi</name>
+    <name>Propwise</name>
     <url>http://www.google.com</url>
     <description>Propwise 管理后台</description>
 
@@ -245,7 +245,8 @@
 	    </plugins>
 	</build>
 
-	<repositories>
+
+    <repositories>
 	    <repository>
 	        <id>public</id>
 	        <name>aliyun nexus</name>
@@ -269,5 +270,6 @@
 	        </snapshots>
 	    </pluginRepository>
 	</pluginRepositories>
+
 
 </project>
