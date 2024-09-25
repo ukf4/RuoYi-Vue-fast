@@ -79,17 +79,32 @@ public class PwUserPropertyController extends BaseController
     /**
      * 新增用户房源收藏
      */
+    @ApiOperation("新增-用户房源")
     @PreAuthorize("@ss.hasPermi('propwise:userProperty:add')")
     @Log(title = "用户房源收藏", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody PwUserProperty pwUserProperty)
     {
+        // TODO 用户收藏房源的操作逻辑
+        //  检查房源是否存在，不存在则在 PwProperty 表 中新增一条房源信息，返回房源id
+        //  然后在 PwUserProperty 表中新增一条记录，关联房源id 和 用户id
+        //  最后返回成功信息
+
+
+
+
+
+
+
+
+
         return toAjax(pwUserPropertyService.insertPwUserProperty(pwUserProperty));
     }
 
     /**
      * 修改用户房源收藏
      */
+    @ApiOperation("修改-用户房源信息")
     @PreAuthorize("@ss.hasPermi('propwise:userProperty:edit')")
     @Log(title = "用户房源收藏", businessType = BusinessType.UPDATE)
     @PutMapping
@@ -101,6 +116,7 @@ public class PwUserPropertyController extends BaseController
     /**
      * 删除用户房源收藏
      */
+    @ApiOperation("删除-用户房源信息")
     @PreAuthorize("@ss.hasPermi('propwise:userProperty:remove')")
     @Log(title = "用户房源收藏", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")

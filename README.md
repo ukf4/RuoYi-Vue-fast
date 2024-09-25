@@ -9,7 +9,7 @@
 
 
 1 初始化数据库
-  项目初始化数据文件是 sql/pw-dev_20240924.1.sql
+  项目初始化数据文件是 sql/pw-dev_20240924.2.sql
 
 2 修改项目配置文件 的数据库连接信息 、 日志文件路径 、端口号等
 
@@ -20,4 +20,8 @@
   默认前端地址
   http://localhost/
 
- 
+
+5 API接口文档
+  启动后端后访问
+  http://localhost:8080/swagger-ui/index.html
+
