@@ -6,9 +6,9 @@ spring:
         druid:
             # 主库数据源
             master:
-                url: jdbc:mysql://127.0.0.1:3306/pw-dev?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+                url: jdbc:mysql://db1.pw.on.sjin.cc:13306/pw-dev?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
                 username: pw-dev_user
-                password: 53PsUGA8N
+                password: DPKp5jehe3Ai7P4W
             # 从库数据源
             slave:
                 # 从数据源开关/默认关闭
@@ -47,8 +47,8 @@ spring:
                 allow:
                 url-pattern: /druid/*
                 # 控制台管理用户名和密码
-                login-username: ruoyi
-                login-password: 123456
+                login-username: propwise
+                login-password: 123456UK
             filter:
                 stat:
                     enabled: true

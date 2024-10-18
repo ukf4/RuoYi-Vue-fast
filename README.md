@@ -25,3 +25,10 @@
   启动后端后访问
   http://localhost:8080/swagger-ui/index.html
 
+
+
+
+
+docker 启动
+docker run -it --name java -v /path/to/app:/app bitnami/java:latest \
+java -jar package.jar
